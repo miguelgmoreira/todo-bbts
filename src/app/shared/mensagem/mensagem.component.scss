@@ -1,0 +1,22 @@
+.status-message {
+    width: 20%;
+    padding: 15px 5px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 2rem;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+.status-message.success {
+    background-color: #38b000;
+    color: #EDF2F4;
+    animation: status 3s ease forwards;
+}
+
+.status-message.error {
+    background-color: #d00000;
+    color: #EDF2F4;
+    animation: status 3s ease forwards;
+}

@@ -1,0 +1,60 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Editar tarefa</h4>
+    <button type="button" class="btn btn-danger" aria-label="Close"  (click)="close()">
+       ×
+    </button>
+ </div>
+ <div class="modal-body dialog">
+    <form [formGroup]="todoEdit">
+        <div class="mb-1">
+            <input type="text" 
+            class="form-control" 
+            placeholder="Digite o título" 
+            tabindex="1" 
+            formControlName="nome"
+            [value]="todo.nome"
+            />
+        </div>
+
+        <div class="mb-1">
+            <select type="select"
+            class="form-select" 
+            tabindex="2" 
+            formControlName="tipo"
+            >
+
+            <option [value]="categoria.tipo" *ngFor="let categoria of categorias">{{categoria.tipo}}</option>
+
+            </select>
+        </div>
+
+        <div class="mb-1">
+            <select type="select"
+            class="form-select" 
+            tabindex="3" 
+            formControlName="hora"
+            >
+
+            <option value="">Selecione uma categoria</option>
+            <option [value]="hora.hora" *ngFor="let hora of horas">{{hora.hora}}</option>
+
+            </select>
+        </div>
+        
+    </form>
+ </div>
+ <div class="modal-footer">
+    <button class="btn btn-primary" (click)="confirm()">Atualizar</button>
+    <button type="button" class="btn btn-default" (click)="close()">Close</button>
+ </div>
+ <app-mensagem 
+        [status]="situacao"  
+        [textoMensagem]="'Tarefa adicionada com sucesso'" 
+        [icone]="'bi bi-check-circle'" 
+        *ngIf="situacao === 'success'"
+        ></app-mensagem>
+        <app-mensagem 
+        [status]="situacao"  
+        [textoMensagem]="'Erro ao adicionar tarefa'" 
+        [icone]="'bi bi-x-circle'"
+        *ngIf="situacao === 'error'"></app-mensagem>

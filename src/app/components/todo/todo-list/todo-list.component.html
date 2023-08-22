@@ -1,0 +1,47 @@
+<h1>Lista de tarefas</h1>
+<hr>
+<app-todo-add (emitirClick)="atualizarLista()"></app-todo-add>
+<hr>
+<app-todo-search (emitirTexto)="textoMudou($event)"></app-todo-search>
+<hr>
+<app-todo-filter (emitirOpcao)="opcaoMudou($event)" (emitirOrdem)="ordemMudou($event)"></app-todo-filter>
+<hr>
+<div class="todo" 
+    *ngFor="let todo of todos 
+    | filterSearch:filterText 
+    | filterSelect:filterOption
+    | filterOrdem: filterOrdem"
+    [ngClass]="{'completed': todo.status === 'completa'}">
+
+    <div class="todo-info">
+        <p>{{todo.nome}}</p>
+        <p>({{todo.tipo}})</p>
+        <p>{{todo.hora}}</p>
+    </div>
+
+    <div class="botoes">
+        <button 
+        class="btn btn-primary" 
+        (click)="mudarStatus(todo)">
+        <i class="bi bi-check-lg" *ngIf="!todo.estaCompleta"></i>
+        <i class="bi bi-x-lg" *ngIf="todo.estaCompleta"></i>
+    </button>
+
+    <button 
+        class="btn btn-danger" 
+        (click)="remover(todo.id)"><i class="bi bi-trash-fill"></i>
+    </button>
+
+    
+</div>
+</div>
+<app-mensagem 
+    [status]="situacao"  
+    [textoMensagem]="'Status alterado para ' + status" 
+    [icone]="'bi bi-check-circle'" 
+    *ngIf="situacao === 'success'"></app-mensagem>
+    <app-mensagem 
+    [status]="situacao"  
+    [textoMensagem]="'Erro ao alterar status'" 
+    [icone]="'bi bi-x-circle'"
+    *ngIf="situacao === 'error'"></app-mensagem>

@@ -1,0 +1,96 @@
+{
+  "categorias": [
+    {
+      "tipo": "Trabalho"
+    },
+    {
+      "tipo": "Pessoal"
+    },
+    {
+      "tipo": "Estudos"
+    }
+  ],
+  "horas": [
+    {
+      "hora": "6:00"
+    },
+    {
+      "hora": "6:30"
+    },
+    {
+      "hora": "7:00"
+    },
+    {
+      "hora": "7:30"
+    },
+    {
+      "hora": "8:00"
+    },
+    {
+      "hora": "8:30"
+    },
+    {
+      "hora": "9:00"
+    },
+    {
+      "hora": "9:30"
+    },
+    {
+      "hora": "10:00"
+    },
+    {
+      "hora": "10:30"
+    },
+    {
+      "hora": "11:00"
+    },
+    {
+      "hora": "11:30"
+    },
+    {
+      "hora": "12:00"
+    }
+  ],
+  "todos": [
+    {
+      "id": 1,
+      "nome": "adadaw",
+      "tipo": "Trabalho",
+      "hora": "9:30",
+      "estaCompleta": false,
+      "status": "incompleta"
+    },
+    {
+      "id": 2,
+      "nome": "dawd",
+      "tipo": "Estudos",
+      "hora": "9:30",
+      "estaCompleta": false,
+      "status": "incompleta"
+    },
+    {
+      "id": 3,
+      "nome": "sefse",
+      "tipo": "Estudos",
+      "hora": "8:30",
+      "estaCompleta": false,
+      "status": "incompleta"
+    },
+    {
+      "id": 4,
+      "nome": "a",
+      "tipo": "Estudos",
+      "hora": "10:30",
+      "estaCompleta": true,
+      "status": "completa"
+    },
+    {
+      "id": 5,
+      "nome": "dadawd",
+      "tipo": "Trabalho",
+      "hora": "12:00",
+      "estaCompleta": false,
+      "status": "incompleta"
+    }
+  ]
+}

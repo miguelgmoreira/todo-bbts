@@ -1,0 +1,28 @@
+.todo {
+    box-shadow: 0 0 4px #121214;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+p {
+    margin: 0;
+}
+
+.completed {
+    text-decoration: line-through;
+    background-color: #ddd;
+}
+
+.invalidFeedback {
+    font-size: 80%;
+    color: #dc3545;
+    width: 103px;
+    text-align: left;
+    position: absolute;
+    margin-left: -280px;
+    margin-top: 8px;
+  }

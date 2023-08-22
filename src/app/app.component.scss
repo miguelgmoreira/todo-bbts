@@ -1,0 +1,42 @@
+.conteudo-todo {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.footer-todo {
+    margin-top: 1.8rem;
+}
+
+.app-navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    height: 5rem;
+    padding: 0 4rem;
+    margin-bottom: 3rem;
+}   
+
+.navbar-brand {
+    font-size: 1.8rem;
+}
+
+.app-nav {
+    font-size: 1.4rem;
+    display: flex;
+    gap: .5rem;
+}
+
+.app-nav a {
+    text-decoration: none;
+    transition: .4s;
+}
+
+.app-nav a:hover {
+    color: #d8d8d8;
+}
+
+.active {
+    color: #d8d8d8;
+}

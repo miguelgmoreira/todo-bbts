@@ -1,0 +1,61 @@
+    <h3>Criar tarefa</h3>
+    <form [formGroup]="todoForm" (ngSubmit)="adicionar()">
+
+        <div class="mb-1">
+            <input type="text" 
+            class="form-control" 
+            placeholder="Digite o título" 
+            tabindex="1" 
+            formControlName="nome"
+            [ngClass]="{ 'is-invalid': submitted && f['nome'].errors }">
+            <div *ngIf="submitted && f['nome'].errors" class="invalid-feedback">
+                <div *ngIf="f['nome'].errors['required']">Um tipo deve ser criado</div>
+            </div>
+
+        </div>
+        <div class="mb-1">
+            <select 
+            name="categoria" 
+            id="1" 
+            tabindex="2" 
+            class="form-select" 
+            formControlName="tipo"  
+            [ngClass]="{ 'is-invalid': submitted && f['tipo'].errors }"
+            >
+                <option value="">Selecione uma categoria</option>
+                <option [value]="categoria.tipo" *ngFor="let categoria of categorias">{{categoria.tipo}}</option>
+            </select>
+            <div *ngIf="submitted && f['tipo'].errors" class="invalid-feedback">
+                <div *ngIf="f['tipo'].errors['required']">Um tipo deve ser selecionado</div>
+            </div>
+        </div>
+        <div class="mb-1">
+            <select 
+            name="categoria" 
+            id="2" 
+            tabindex="3" 
+            class="form-select" 
+            formControlName="hora" 
+            [ngClass]="{ 'is-invalid': submitted && f['hora'].errors }">
+                <option value="">Selecione uma hora</option>
+                <option [value]="hora.hora" *ngFor="let hora of horas">{{hora.hora}}</option>
+            </select>
+            <div *ngIf="submitted && f['hora'].errors" class="invalid-feedback">
+                <div *ngIf="f['hora'].errors['required']">Uma hora deve ser selecionada</div>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Criar tarefa</button>
+
+        <app-mensagem 
+        [status]="situacao"  
+        [textoMensagem]="'Tarefa adicionada com sucesso'" 
+        [icone]="'bi bi-check-circle'" 
+        *ngIf="situacao === 'success'"
+        ></app-mensagem>
+        <app-mensagem 
+        [status]="situacao"  
+        [textoMensagem]="'Erro ao adicionar tarefa'" 
+        [icone]="'bi bi-x-circle'"
+        *ngIf="situacao === 'error'"></app-mensagem>
+        
+    </form>

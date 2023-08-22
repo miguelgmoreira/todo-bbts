@@ -1,0 +1,17 @@
+<div class="app-navbar">
+  <div class="navbar-brand">
+    Todo
+  </div>
+  <div class="app-nav">
+    <a routerLink="/" (click)="setActive('home')" [ngClass]="{'active': active === 'home'}">Home</a>
+    <a routerLink="/tarefas" (click)="setActive('tarefas')" [ngClass]="{'active': active === 'tarefas'}">Terefas</a>
+  </div>
+</div>
+<div class="container-lg">
+  <div class="conteudo-todo">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div class="footer-todo">
+  <app-footer></app-footer>
+</div>

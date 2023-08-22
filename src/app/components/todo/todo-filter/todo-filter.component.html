@@ -1,0 +1,21 @@
+<h3>Filtrar</h3>
+<div class="filter-options">
+    <div class="d-flex gap-5 align-items-center">
+        <div class="select-area">
+            <label class="form-label">Status:</label>
+            <select name="" id="" class="form-select" [(ngModel)]="opcaoSelecionada" (ngModelChange)="opcaoMudou()">
+                <option value="todas">Todas</option>
+                <option value="completas">Completas</option>
+                <option value="incompletas">Incompletas</option>
+            </select>
+        </div>
+
+        <div class="ordernar">
+            <p>Ordenar por horário</p>
+            <div class="botoes">
+                <button class="btn btn-primary" (click)="mudarOrdem('crescente')">Cresc</button>
+                <button class="btn btn-primary" (click)="mudarOrdem('decrescente')">Decresc</button>
+            </div>
+        </div>
+    </div>
+</div>
