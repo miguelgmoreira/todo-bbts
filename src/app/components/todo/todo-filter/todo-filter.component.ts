@@ -1,28 +1,23 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
   selector: 'app-todo-filter',
   templateUrl: './todo-filter.component.html',
-  styleUrls: ['./todo-filter.component.scss']
+  styleUrls: ['./todo-filter.component.scss'],
 })
 export class TodoFilterComponent {
-  @Output() emitirOpcao = new EventEmitter<string>()
-  @Output() emitirOrdem = new EventEmitter<string>()
-  opcaoSelecionada: string = 'todas'
-  ordem: string = 'crescente'
+  opcaoSelecionada: string = 'todas';
+  ordem: string = '';
 
-  ngOnInit(): void {
-    this.emitirOrdem.emit(this.ordem)
-  }
+  constructor(private todoService: TodoService) { }
 
   opcaoMudou() {
-    this.emitirOpcao.emit(this.opcaoSelecionada)
-    this.emitirOrdem.emit(this.ordem)
+    this.todoService.opcaoMudou.next(this.opcaoSelecionada)
   }
 
   mudarOrdem(ordem: string) {
-    this.ordem = ordem
-    this.emitirOrdem.emit(this.ordem)
+    this.ordem = ordem;
+    this.todoService.ordemMudou.next(this.ordem);
   }
-
 }

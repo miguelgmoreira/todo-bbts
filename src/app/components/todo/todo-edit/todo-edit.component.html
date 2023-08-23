@@ -13,7 +13,11 @@
             tabindex="1" 
             formControlName="nome"
             [value]="todo.nome"
+            [ngClass]="{ 'is-invalid': submitted && f['nome'].errors }"
             />
+            <div *ngIf="submitted && f['nome'].errors" class="invalid-feedback">
+                <div *ngIf="f['nome'].errors['required']">Um nome deve ser definido</div>
+            </div>
         </div>
 
         <div class="mb-1">
@@ -26,6 +30,7 @@
             <option [value]="categoria.tipo" *ngFor="let categoria of categorias">{{categoria.tipo}}</option>
 
             </select>
+            
         </div>
 
         <div class="mb-1">
@@ -33,12 +38,16 @@
             class="form-select" 
             tabindex="3" 
             formControlName="hora"
+            [ngClass]="{ 'is-invalid': submitted && f['hora'].errors }"
             >
 
             <option value="">Selecione uma categoria</option>
             <option [value]="hora.hora" *ngFor="let hora of horas">{{hora.hora}}</option>
 
             </select>
+            <div *ngIf="submitted && f['hora'].errors" class="invalid-feedback">
+                <div *ngIf="f['hora'].errors['required']">Uma hora deve ser definida</div>
+            </div>
         </div>
         
     </form>
@@ -47,14 +56,3 @@
     <button class="btn btn-primary" (click)="confirm()">Atualizar</button>
     <button type="button" class="btn btn-default" (click)="close()">Close</button>
  </div>
- <app-mensagem 
-        [status]="situacao"  
-        [textoMensagem]="'Tarefa adicionada com sucesso'" 
-        [icone]="'bi bi-check-circle'" 
-        *ngIf="situacao === 'success'"
-        ></app-mensagem>
-        <app-mensagem 
-        [status]="situacao"  
-        [textoMensagem]="'Erro ao adicionar tarefa'" 
-        [icone]="'bi bi-x-circle'"
-        *ngIf="situacao === 'error'"></app-mensagem>

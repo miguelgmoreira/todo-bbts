@@ -2,9 +2,9 @@
 <hr>
 <app-todo-add (emitirClick)="atualizarLista()"></app-todo-add>
 <hr>
-<app-todo-search (emitirTexto)="textoMudou($event)"></app-todo-search>
+<app-todo-search></app-todo-search>
 <hr>
-<app-todo-filter (emitirOpcao)="opcaoMudou($event)" (emitirOrdem)="ordemMudou($event)"></app-todo-filter>
+<app-todo-filter></app-todo-filter>
 <hr>
 <div class="todo" 
     *ngFor="let todo of todos 

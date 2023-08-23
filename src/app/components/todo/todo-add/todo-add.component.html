@@ -26,7 +26,7 @@
                 <option [value]="categoria.tipo" *ngFor="let categoria of categorias">{{categoria.tipo}}</option>
             </select>
             <div *ngIf="submitted && f['tipo'].errors" class="invalid-feedback">
-                <div *ngIf="f['tipo'].errors['required']">Um tipo deve ser selecionado</div>
+                <div *ngIf="f['tipo'].errors['required']">Uma categoria deve ser selecionado</div>
             </div>
         </div>
         <div class="mb-1">

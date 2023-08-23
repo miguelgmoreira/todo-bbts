@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Todo } from '../models/todo.model';
 import { TodoService } from 'src/app/services/todo.service';
-import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Subscription} from 'rxjs'
 import {clone} from 'lodash'
 import { TodoEditComponent } from '../todo-edit/todo-edit.component';
@@ -21,6 +21,28 @@ export class TodoTableComponent implements OnInit {
 
   constructor(private todoService: TodoService, private modalService: NgbModal) {
     this.listaSubscription = new Subscription()
+
+    this.todoService.modalClosed.subscribe({
+      next: () => {
+        console.log('Tarefa editada com sucesso')
+
+        this.situacao = 'success'
+        setTimeout(() => {
+          this.situacao = ''
+        }, 2500)
+
+      },
+      error: (error: Error) => {
+        console.log('Ocorreu um erro ao editar' + error)
+
+        this.situacao = 'error'
+        setTimeout(() => {
+          this.situacao = ''
+        }, 2500)
+
+      },
+    })
+
   }
 
   ngOnInit(): void {

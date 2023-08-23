@@ -16,8 +16,8 @@
             <td>{{todo.status}}</td>
             <td>
                 <div class="botoes">
-                    <button class="btn btn-primary"><i class="bi bi-pencil-square" (click)="openEditModal(todo)"></i></button>
-                    <button class="btn btn-danger"><i class="bi bi-trash3" (click)="remover(todo.id)"></i></button>
+                    <button class="btn btn-primary" (click)="openEditModal(todo)"><i class="bi bi-pencil-square"></i></button>
+                    <button class="btn btn-danger" (click)="remover(todo.id)"><i class="bi bi-trash3"></i></button>
                 </div>
             </td>
           </tr>
@@ -25,7 +25,7 @@
       </table>
       <app-mensagem 
         [status]="situacao"  
-        [textoMensagem]="'Tarefa adicionada com sucesso'" 
+        [textoMensagem]="'Tarefa editada com sucesso'" 
         [icone]="'bi bi-check-circle'" 
         *ngIf="situacao === 'success'"
         ></app-mensagem>

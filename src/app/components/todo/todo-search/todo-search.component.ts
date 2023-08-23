@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
   selector: 'app-todo-search',
@@ -6,11 +7,12 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./todo-search.component.scss']
 })
 export class TodoSearchComponent {
-  @Output() emitirTexto = new EventEmitter<any>()
   texto: string = ''
 
+  constructor(private todoService: TodoService) {}
+
   mandaTexto() {
-    this.emitirTexto.emit(this.texto)
+    this.todoService.textoMudou.next(this.texto)
   }
 
 }

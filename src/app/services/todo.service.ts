@@ -1,43 +1,56 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, catchError, map, throwError } from 'rxjs'
+import { EventEmitter, Injectable } from '@angular/core';
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  catchError,
+  map,
+  throwError,
+} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Categoria } from '../components/todo/models/categorias.model';
 import { Hora } from '../components/todo/models/horas.model';
 import { Todo } from '../components/todo/models/todo.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TodoService {
-  private baseApiUrl = 'http://localhost:3000'
-  private categoriasUrl = '/categorias'
-  private horasUrl = '/horas'
-  private todoUrl = '/todos'
+  private baseApiUrl = 'http://localhost:3000';
 
   private atualizarListaRecursosSource = new Subject<void>();
-  atualizarListaRecursos$ = this.atualizarListaRecursosSource.asObservable()
+  atualizarListaRecursos$ = this.atualizarListaRecursosSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  textoMudou = new Subject<string>();
+  opcaoMudou = new Subject<string>();
+  ordemMudou = new Subject<string>();
+  modalClosed = new EventEmitter<Event>();
+
+  constructor(private http: HttpClient) {}
 
   getCategorias(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>(this.baseApiUrl + this.categoriasUrl)
+    const path = `${this.baseApiUrl}/categorias`;
+    return this.http.get<Categoria[]>(path);
   }
 
   getHoras(): Observable<Hora[]> {
-    return this.http.get<Hora[]>(this.baseApiUrl + this.horasUrl)
+    const path = `${this.baseApiUrl}/horas`;
+    return this.http.get<Hora[]>(path);
   }
 
   getTodos(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(this.baseApiUrl + this.todoUrl)
+    const path = `${this.baseApiUrl}/todos`;
+    return this.http.get<Todo[]>(path);
   }
 
   adicionarTodo(todo: Todo) {
-    return this.http.post<Todo>(this.baseApiUrl + this.todoUrl, todo).pipe(
-      map(response => {
+    const path = `${this.baseApiUrl}/todos`;
+    return this.http.post<Todo>(path, todo).pipe(
+      map((response) => {
         console.log('Todo adicionado com sucesso:', response);
         return response;
       }),
-      catchError(error => {
+      catchError((error) => {
         console.error('Erro ao criar todo :', error);
         return throwError(() => new Error(error));
       })
@@ -45,17 +58,16 @@ export class TodoService {
   }
 
   removeTodo(id: number) {
-    const path = `${this.baseApiUrl + this.todoUrl}/${id}`
-    return this.http.delete(path)
+    const path = `${this.baseApiUrl}/todos/${id}`;
+    return this.http.delete(path);
   }
 
   updateTodo(todo: Todo): Observable<Todo> {
-    const path = `${this.baseApiUrl + this.todoUrl}/${todo.id}`
-    return this.http.put<Todo>(path, todo)
+    const path = `${this.baseApiUrl}/todos/${todo.id}`;
+    return this.http.put<Todo>(path, todo);
   }
 
   notificarAtualizacaoDaLista() {
     this.atualizarListaRecursosSource.next();
   }
-
 }

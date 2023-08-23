@@ -53,41 +53,9 @@
   ],
   "todos": [
     {
-      "id": 1,
-      "nome": "adadaw",
-      "tipo": "Trabalho",
-      "hora": "9:30",
-      "estaCompleta": false,
-      "status": "incompleta"
-    },
-    {
-      "id": 2,
-      "nome": "dawd",
-      "tipo": "Estudos",
-      "hora": "9:30",
-      "estaCompleta": false,
-      "status": "incompleta"
-    },
-    {
-      "id": 3,
-      "nome": "sefse",
-      "tipo": "Estudos",
-      "hora": "8:30",
-      "estaCompleta": false,
-      "status": "incompleta"
-    },
-    {
-      "id": 4,
-      "nome": "a",
-      "tipo": "Estudos",
-      "hora": "10:30",
-      "estaCompleta": true,
-      "status": "completa"
-    },
-    {
       "id": 5,
-      "nome": "dadawd",
-      "tipo": "Trabalho",
+      "nome": "vvvvv",
+      "tipo": "Pessoal",
       "hora": "12:00",
       "estaCompleta": false,
       "status": "incompleta"
