@@ -70,4 +70,23 @@ export class TodoService {
   notificarAtualizacaoDaLista() {
     this.atualizarListaTodos.next();
   }
+
+  adicionarTodoAoHistorico(todo: Todo) {
+    const path = `${this.baseApiUrl}/historico`;
+    return this.http.post<Todo>(path, todo).pipe(
+      map((response) => {
+        console.log('Todo adicionado com sucesso ao histórico:', response);
+        return response;
+      }),
+      catchError((error) => {
+        console.error('Erro ao adicionar todo ao histórico:', error);
+        return throwError(() => new Error(error));
+      })
+    );
+  }
+
+  getTodoHistorico(): Observable<Todo[]> {
+    const path = `${this.baseApiUrl}/historico`;
+    return this.http.get<Todo[]>(path);
+  }
 }

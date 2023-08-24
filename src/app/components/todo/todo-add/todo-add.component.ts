@@ -59,6 +59,15 @@ export class TodoAddComponent implements OnInit {
   }
 
   adicionar() {
+    const d = new Date();
+    const horaFormatada =
+      d.getHours().toString().padStart(2, '0') +
+      ':' +
+      d.getMinutes().toString().padStart(2, '0');
+    const dia = d.getDate();
+    const mes = d.getMonth() + 1;
+    const dataDeCriacao = horaFormatada + ' - ' + dia + '/' + mes;
+
     this.submitted = true;
     if (!this.todoForm.valid) {
       console.log('Formulário inválido');
@@ -67,6 +76,8 @@ export class TodoAddComponent implements OnInit {
       this.todo.nome = this.todoForm.value.nome;
       this.todo.tipo = this.todoForm.value.tipo;
       this.todo.hora = this.todoForm.value.hora;
+      this.todo.adicionadaAoHistoricoEm = dataDeCriacao;
+      this.todo.metodoDeAdicaoAoHistorico = 'Adicionado';
       this.todoService.adicionarTodo(this.todo).subscribe({
         next: () => {
           this.situacao = 'success';
@@ -77,6 +88,8 @@ export class TodoAddComponent implements OnInit {
           this.clear();
 
           this.todoService.notificarAtualizacaoDaLista();
+
+          this.adicionarTodoAoHistórico(this.todo);
         },
         error: (error) => {
           console.error('Erro durante execução do Script', error);
@@ -97,5 +110,9 @@ export class TodoAddComponent implements OnInit {
       hora: '',
     });
     this.submitted = false;
+  }
+
+  adicionarTodoAoHistórico(todo: Todo) {
+    this.todoService.adicionarTodoAoHistorico(todo).subscribe();
   }
 }

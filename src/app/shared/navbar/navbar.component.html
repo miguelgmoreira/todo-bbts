@@ -1,0 +1,12 @@
+<div class="app-navbar">
+    <div class="navbar-brand">
+        <a routerLink="/">
+            <img src="https://raw.githubusercontent.com/miguelgmoreira/ToDo-app/main/public/favicon.ico" alt="">
+        </a>
+    </div>
+    <div class="app-nav">
+      <a routerLink="/" (click)="setActive('home')" [ngClass]="{'active': active === 'home'}">Home</a>
+      <a routerLink="/tarefas" (click)="setActive('tarefas')" [ngClass]="{'active': active === 'tarefas'}">Tarefas</a>
+      <a routerLink="/historico" (click)="setActive('historico')" [ngClass]="{'active': active === 'historico'}">Histórico</a>
+    </div>
+  </div>

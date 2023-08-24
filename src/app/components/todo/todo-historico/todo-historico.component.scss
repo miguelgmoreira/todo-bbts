@@ -1,0 +1,31 @@
+.item-da-lista {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  display: block;
+  border-radius: 5px;
+
+  padding: var(--bs-list-group-item-padding-y)
+    var(--bs-list-group-item-padding-x);
+  color: var(--bs-list-group-color);
+  text-decoration: none;
+  background-color: var(--bs-list-group-bg);
+  border: var(--bs-list-group-border-width) solid
+    var(--bs-list-group-border-color);
+  width: 100%;
+  color: var(--bs-list-group-action-color);
+  text-align: inherit;
+}
+
+.adicionado {
+  color: #80b918;
+}
+
+.excluido {
+  color: #d90429;
+}
+
+.alterado {
+  color: #0d6efd;
+}

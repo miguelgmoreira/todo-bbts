@@ -16,6 +16,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   estaCompleta: boolean = false;
   situacao: string = '';
   status: string = '';
+  isLoading = false;
   private textoSub: Subscription;
   private ordemSub: Subscription;
   private opcaoSub: Subscription;
@@ -49,16 +50,31 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   getTodos() {
-    this.todoService
-      .getTodos()
-      .subscribe((todos: Todo[]) => (this.todos = todos));
+    this.isLoading = true;
+    this.todoService.getTodos().subscribe((todos: Todo[]) => {
+      this.isLoading = false;
+      this.todos = todos;
+    });
   }
 
-  remover(id: number) {
-    this.todoService.removeTodo(id).subscribe({
+  remover(todo: Todo) {
+    const d = new Date();
+    const horaFormatada =
+      d.getHours().toString().padStart(2, '0') +
+      ':' +
+      d.getMinutes().toString().padStart(2, '0');
+    const dia = d.getDate();
+    const mes = d.getMonth() + 1;
+    const dataDeExclusao = horaFormatada + ' - ' + dia + '/' + mes;
+
+    this.todoService.removeTodo(todo.id).subscribe({
       next: () => {
+        todo.adicionadaAoHistoricoEm = dataDeExclusao;
+        todo.metodoDeAdicaoAoHistorico = 'Excluído';
+
+        this.adicionarTodoAoHistórico(todo);
         console.log('response received');
-        this.getTodos();
+        this.atualizarLista();
       },
       error: (error) => {
         console.error('Erro durante execução do Script', error);
@@ -71,6 +87,18 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   mudarStatus(todo: Todo) {
+    const d = new Date();
+    const horaFormatada =
+      d.getHours().toString().padStart(2, '0') +
+      ':' +
+      d.getMinutes().toString().padStart(2, '0');
+    const dia = d.getDate();
+    const mes = d.getMonth() + 1;
+    const dataDeCriacao = horaFormatada + ' - ' + dia + '/' + mes;
+
+    todo.adicionadaAoHistoricoEm = dataDeCriacao;
+    todo.metodoDeAdicaoAoHistorico = 'Status alterado';
+
     todo.estaCompleta = !todo.estaCompleta;
     if (todo.status === 'incompleta') {
       todo.status = 'completa';
@@ -82,6 +110,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
     this.todoService.updateTodo(todo).subscribe({
       next: () => {
+        this.adicionarTodoAoHistórico(todo);
+
         this.situacao = 'success';
         setTimeout(() => {
           this.situacao = '';
@@ -95,5 +125,10 @@ export class TodoListComponent implements OnInit, OnDestroy {
         }, 2500);
       },
     });
+  }
+
+  adicionarTodoAoHistórico(todo: Todo) {
+    todo.id = Date.now();
+    this.todoService.adicionarTodoAoHistorico(todo).subscribe();
   }
 }

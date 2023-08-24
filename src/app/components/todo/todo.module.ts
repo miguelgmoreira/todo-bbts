@@ -8,13 +8,15 @@ import { TodoEditComponent } from './todo-edit/todo-edit.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoSearchComponent } from './todo-search/todo-search.component';
 import { TodoFilterComponent } from './todo-filter/todo-filter.component';
+import { LoadingComponent } from 'src/app/shared/loading/loading.component';
 import { FilterPipe } from 'src/app/pipes/filter-select.pipe';
 import { FilterSearchPipe } from 'src/app/pipes/filter-search.pipe';
 import { FilterOrdemPipe } from 'src/app/pipes/filter-ordem.pipe';
 import { MensagemComponent } from 'src/app/shared/mensagem/mensagem.component';
 import { TodoTableComponent } from './todo-table/todo-table.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { TodoHistoricoComponent } from './todo-historico/todo-historico.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -27,20 +29,23 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     FilterSearchPipe,
     FilterOrdemPipe,
     MensagemComponent,
-    TodoTableComponent
+    TodoTableComponent,
+    LoadingComponent,
+    TodoHistoricoComponent,
   ],
   imports: [
     CommonModule,
     TodoRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ModalModule
+    ModalModule,
+    NgxPaginationModule,
   ],
   exports: [
     TodoAddComponent,
     TodoSearchComponent,
     TodoFilterComponent,
-    TodoListComponent
-  ]
+    TodoListComponent,
+  ],
 })
-export class TodoModule { }
+export class TodoModule {}

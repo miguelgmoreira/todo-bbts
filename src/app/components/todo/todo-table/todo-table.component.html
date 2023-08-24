@@ -9,7 +9,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="" *ngFor="let todo of todos">
+          <tr class="" *ngFor="let todo of todos | filterOrdem: filterOrdem">
             <td>{{todo.nome}}</td>
             <td>{{todo.tipo}}</td>
             <td>{{todo.hora}}</td>

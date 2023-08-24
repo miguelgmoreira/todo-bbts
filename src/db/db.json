@@ -53,28 +53,94 @@
   ],
   "todos": [
     {
-      "id": 7,
-      "nome": "seraquevai",
-      "tipo": "Pessoal",
-      "hora": "10:00",
+      "id": 2,
+      "nome": "dawdwad",
+      "tipo": "Trabalho",
+      "hora": "7:30",
       "estaCompleta": false,
-      "status": "incompleta"
+      "deletada": false,
+      "status": "incompleta",
+      "adicionadaAoHistoricoEm": "16:39 - 24/8",
+      "metodoDeAdicaoAoHistorico": "Status alterado"
+    }
+  ],
+  "historico": [
+    {
+      "id": 1692904548122,
+      "nome": "adwadawd",
+      "tipo": "Trabalho",
+      "hora": "9:00",
+      "estaCompleta": false,
+      "deletada": false,
+      "status": "incompleta",
+      "adicionadaAoHistoricoEm": "16:15 - 24/8",
+      "metodoDeAdicaoAoHistorico": "Status alterado"
     },
     {
-      "id": 8,
-      "nome": "adawd",
-      "tipo": "Pessoal",
-      "hora": "10:30",
+      "id": 1692904548123,
+      "nome": "dawdwad",
+      "tipo": "Trabalho",
+      "hora": "7:30",
       "estaCompleta": false,
-      "status": "incompleta"
+      "deletada": false,
+      "status": "incompleta",
+      "adicionadaAoHistoricoEm": "16:16 - 24/8",
+      "metodoDeAdicaoAoHistorico": "Adicionado"
     },
     {
-      "id": 9,
-      "nome": "daawdwad",
-      "tipo": "Estudos",
-      "hora": "11:00",
+      "id": 1692904567963,
+      "nome": "adwadawd",
+      "tipo": "Trabalho",
+      "hora": "9:00",
       "estaCompleta": false,
-      "status": "incompleta"
+      "deletada": false,
+      "status": "incompleta",
+      "adicionadaAoHistoricoEm": "16:16 - 24/8",
+      "metodoDeAdicaoAoHistorico": "Excluído"
+    },
+    {
+      "id": 1692905674904,
+      "nome": "dawdwad",
+      "tipo": "Trabalho",
+      "hora": "7:30",
+      "estaCompleta": true,
+      "deletada": false,
+      "status": "completa",
+      "adicionadaAoHistoricoEm": "16:34 - 24/8",
+      "metodoDeAdicaoAoHistorico": "Status alterado"
+    },
+    {
+      "id": 1692905929333,
+      "nome": "dawdwad",
+      "tipo": "Trabalho",
+      "hora": "7:30",
+      "estaCompleta": false,
+      "deletada": false,
+      "status": "incompleta",
+      "adicionadaAoHistoricoEm": "16:38 - 24/8",
+      "metodoDeAdicaoAoHistorico": "Status alterado"
+    },
+    {
+      "id": 1692905949955,
+      "nome": "dawdwad",
+      "tipo": "Trabalho",
+      "hora": "7:30",
+      "estaCompleta": true,
+      "deletada": false,
+      "status": "completa",
+      "adicionadaAoHistoricoEm": "16:39 - 24/8",
+      "metodoDeAdicaoAoHistorico": "Status alterado"
+    },
+    {
+      "id": 1692905955991,
+      "nome": "dawdwad",
+      "tipo": "Trabalho",
+      "hora": "7:30",
+      "estaCompleta": false,
+      "deletada": false,
+      "status": "incompleta",
+      "adicionadaAoHistoricoEm": "16:39 - 24/8",
+      "metodoDeAdicaoAoHistorico": "Status alterado"
     }
   ]
 }

@@ -1,0 +1,18 @@
+<div class="list-group">
+  <div class="item-da-lista" *ngFor="let todo of todosHistorico">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{ todo.nome }}</h5>
+      <strong>{{ todo.adicionadaAoHistoricoEm }}</strong>
+    </div>
+    <p class="mb-1">{{ todo.tipo }}</p>
+    <p class="mb-1">{{ todo.hora }}</p>
+    <small
+      [ngClass]="{
+        adicionado: todo.metodoDeAdicaoAoHistorico === 'Adicionado',
+        excluido: todo.metodoDeAdicaoAoHistorico === 'Excluído',
+        alterado: todo.metodoDeAdicaoAoHistorico === 'Status alterado'
+      }"
+      >{{ todo.metodoDeAdicaoAoHistorico }}
+    </small>
+  </div>
+</div>

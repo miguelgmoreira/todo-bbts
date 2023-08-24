@@ -16,6 +16,7 @@ export class TodoTableComponent implements OnInit {
   updateTodo: Todo = new Todo();
   listaSubscription: Subscription = new Subscription();
   situacao: string = '';
+  filterOrdem: string = 'crescente';
 
   config = {};
 
