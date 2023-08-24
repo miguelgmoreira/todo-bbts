@@ -1,82 +1,80 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../models/todo.model';
 import { TodoService } from 'src/app/services/todo.service';
-import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Subscription} from 'rxjs'
-import {clone} from 'lodash'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
+import { clone } from 'lodash';
 import { TodoEditComponent } from '../todo-edit/todo-edit.component';
 
 @Component({
   selector: 'app-todo-table',
   templateUrl: './todo-table.component.html',
-  styleUrls: ['./todo-table.component.scss']
+  styleUrls: ['./todo-table.component.scss'],
 })
 export class TodoTableComponent implements OnInit {
-  todos: Todo[] = []
+  todos: Todo[] = [];
   updateTodo: Todo = new Todo();
-  listaSubscription!: Subscription
-  situacao: string = ''
+  listaSubscription: Subscription = new Subscription();
+  situacao: string = '';
 
-  config =  {}
+  config = {};
 
-  constructor(private todoService: TodoService, private modalService: NgbModal) {
-    this.listaSubscription = new Subscription()
-
+  constructor(
+    private todoService: TodoService,
+    private modalService: NgbModal
+  ) {
     this.todoService.modalClosed.subscribe({
       next: () => {
-        console.log('Tarefa editada com sucesso')
+        console.log('Tarefa editada com sucesso');
 
-        this.situacao = 'success'
+        this.situacao = 'success';
         setTimeout(() => {
-          this.situacao = ''
-        }, 2500)
-
+          this.situacao = '';
+        }, 2500);
       },
       error: (error: Error) => {
-        console.log('Ocorreu um erro ao editar' + error)
+        console.log('Ocorreu um erro ao editar' + error);
 
-        this.situacao = 'error'
+        this.situacao = 'error';
         setTimeout(() => {
-          this.situacao = ''
-        }, 2500)
-
+          this.situacao = '';
+        }, 2500);
       },
-    })
-
+    });
   }
 
   ngOnInit(): void {
     this.getTodos();
 
-    this.listaSubscription = this.todoService.atualizarListaRecursos$.subscribe(() => {
-      this.atualizarLista()
-    })
+    this.listaSubscription = this.todoService.atualizarListaTodos$.subscribe(
+      () => {
+        this.atualizarLista();
+      }
+    );
 
     this.config = {
-      backdrop  : 'static',
-      keyboard  : false}
+      backdrop: 'static',
+      keyboard: false,
+    };
   }
 
   getTodos() {
-    this.todoService.getTodos().subscribe(todos => this.todos = todos);
+    this.todoService.getTodos().subscribe((todos) => (this.todos = todos));
   }
 
   remover(id: number) {
-    this.todoService.removeTodo(id).subscribe(
-      {
-        next: () => {
-          console.log('response received');
-          this.getTodos()
-        },
-        error: (error) => {
-          console.error('Erro durante execução do Script', error);
-        }
-      }
-    )
+    this.todoService.removeTodo(id).subscribe({
+      next: () => {
+        console.log('response received');
+        this.getTodos();
+      },
+      error: (error) => {
+        console.error('Erro durante execução do Script', error);
+      },
+    });
   }
 
-  openEditModal(todo: Todo){
-
+  openEditModal(todo: Todo) {
     this.updateTodo = clone(todo);
 
     const modalRef = this.modalService.open(TodoEditComponent, this.config);
@@ -84,25 +82,20 @@ export class TodoTableComponent implements OnInit {
     modalRef.componentInstance.todo = this.updateTodo;
 
     modalRef.result.then((result) => {
-
       if (result) {
-
         console.log(result);
-
       }
-
     });
-
   }
 
   atualizarLista() {
     this.todoService.getTodos().subscribe({
-      next: recursosAtualizados => {
-        this.todos = recursosAtualizados
+      next: (recursosAtualizados) => {
+        this.todos = recursosAtualizados;
       },
-      error: error => {
-        console.log(error)
-      }
-    })
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 }

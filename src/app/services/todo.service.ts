@@ -18,8 +18,8 @@ import { Todo } from '../components/todo/models/todo.model';
 export class TodoService {
   private baseApiUrl = 'http://localhost:3000';
 
-  private atualizarListaRecursosSource = new Subject<void>();
-  atualizarListaRecursos$ = this.atualizarListaRecursosSource.asObservable();
+  private atualizarListaTodos = new Subject<void>();
+  atualizarListaTodos$ = this.atualizarListaTodos.asObservable();
 
   textoMudou = new Subject<string>();
   opcaoMudou = new Subject<string>();
@@ -68,6 +68,6 @@ export class TodoService {
   }
 
   notificarAtualizacaoDaLista() {
-    this.atualizarListaRecursosSource.next();
+    this.atualizarListaTodos.next();
   }
 }

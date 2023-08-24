@@ -17,13 +17,12 @@ import { Todo } from '../models/todo.model';
   styleUrls: ['./todo-add.component.scss'],
 })
 export class TodoAddComponent implements OnInit {
-  @Output() emitirClick = new EventEmitter<Event>();
   public todo: Todo = new Todo();
-  public categorias: Categoria[]
-  public horas: Hora[]
-  public id: number
+  public categorias: Categoria[];
+  public horas: Hora[];
+  public id: number;
   public submitted: boolean = false;
-  public situacao: string
+  public situacao: string;
 
   public todoForm: FormGroup = new FormGroup({
     nome: new FormControl(''),
@@ -76,6 +75,8 @@ export class TodoAddComponent implements OnInit {
           }, 3000);
 
           this.clear();
+
+          this.todoService.notificarAtualizacaoDaLista();
         },
         error: (error) => {
           console.error('Erro durante execução do Script', error);
@@ -87,7 +88,6 @@ export class TodoAddComponent implements OnInit {
         },
       });
     }
-    this.emitirClick.emit();
   }
 
   clear() {

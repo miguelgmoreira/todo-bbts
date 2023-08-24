@@ -21,7 +21,6 @@ export class TodoListComponent implements OnInit, OnDestroy {
   private opcaoSub: Subscription;
 
   constructor(private todoService: TodoService) {
-
     this.textoSub = this.todoService.textoMudou.subscribe((textoFiltrado) => {
       this.filterText = textoFiltrado;
     });
@@ -33,7 +32,10 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.opcaoSub = this.todoService.opcaoMudou.subscribe((novaOpcao) => {
       this.filterOption = novaOpcao;
     });
-    
+
+    this.todoService.atualizarListaTodos$.subscribe(() => {
+      this.getTodos();
+    });
   }
 
   ngOnInit(): void {
@@ -41,9 +43,9 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.textoSub.unsubscribe()
-    this.ordemSub.unsubscribe()
-    this.opcaoSub.unsubscribe()
+    this.textoSub.unsubscribe();
+    this.ordemSub.unsubscribe();
+    this.opcaoSub.unsubscribe();
   }
 
   getTodos() {
