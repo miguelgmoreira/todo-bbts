@@ -1,0 +1,20 @@
+<div ngbDropdown class="dropdown">
+  <button
+    ngbDropdownToggle
+    class="btn btn-transparent color"
+    type="button"
+    id="dropdownMenuButton1"
+    aria-expanded="false"
+  >
+    <i class="bi bi-brightness-high-fill" *ngIf="darkMode === false"></i>
+    <i class="bi bi-moon-fill" *ngIf="darkMode === true"> </i>
+  </button>
+  <ul ngbDropdownMenu aria-labelledby="dropdownMenuButton1">
+    <li (click)="modeToggle('light')">
+      <a ngbDropdownItem>Light Mode</a>
+    </li>
+    <li (click)="modeToggle('dark')">
+      <a ngbDropdownItem>Dark Mode</a>
+    </li>
+  </ul>
+</div>

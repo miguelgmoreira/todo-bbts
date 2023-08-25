@@ -17,6 +17,7 @@ export class TodoTableComponent implements OnInit {
   listaSubscription: Subscription = new Subscription();
   situacao: string = '';
   filterOrdem: string = 'crescente';
+  tema: string = '';
 
   config = {};
 
@@ -42,6 +43,8 @@ export class TodoTableComponent implements OnInit {
         }, 2500);
       },
     });
+
+    this.todoService.temaMudou.subscribe((resp) => (this.tema = resp));
   }
 
   ngOnInit(): void {

@@ -1,5 +1,16 @@
 <div class="list-group">
-  <div class="item-da-lista" *ngFor="let todo of todosHistorico">
+  <div
+    class="item-da-lista"
+    *ngFor="
+      let todo of todosHistorico
+        | paginate
+          : {
+              itemsPerPage: 8,
+              currentPage: pagination,
+            };
+      let id = index
+    "
+  >
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">{{ todo.nome }}</h5>
       <strong>{{ todo.adicionadaAoHistoricoEm }}</strong>
@@ -16,3 +27,8 @@
     </small>
   </div>
 </div>
+<br />
+<pagination-controls
+  (pageChange)="renderPage($event)"
+  class="d-flex justify-content-center"
+></pagination-controls>

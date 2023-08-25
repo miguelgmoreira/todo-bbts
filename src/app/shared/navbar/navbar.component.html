@@ -1,12 +1,35 @@
 <div class="app-navbar">
+  <div class="d-flex align-items-center gap-3">
     <div class="navbar-brand">
-        <a routerLink="/">
-            <img src="https://raw.githubusercontent.com/miguelgmoreira/ToDo-app/main/public/favicon.ico" alt="">
-        </a>
+      <a routerLink="/">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/GNOME_Todo_icon_2019.svg/1200px-GNOME_Todo_icon_2019.svg.png"
+          alt=""
+        />
+      </a>
     </div>
     <div class="app-nav">
-      <a routerLink="/" (click)="setActive('home')" [ngClass]="{'active': active === 'home'}">Home</a>
-      <a routerLink="/tarefas" (click)="setActive('tarefas')" [ngClass]="{'active': active === 'tarefas'}">Tarefas</a>
-      <a routerLink="/historico" (click)="setActive('historico')" [ngClass]="{'active': active === 'historico'}">Histórico</a>
+      <a
+        routerLink="/"
+        (click)="setActive('home')"
+        [ngClass]="{ active: active === 'home' }"
+        >Home</a
+      >
+      <a
+        routerLink="/tarefas"
+        (click)="setActive('tarefas')"
+        [ngClass]="{ active: active === 'tarefas' }"
+        >Tarefas</a
+      >
+      <a
+        routerLink="/historico"
+        (click)="setActive('historico')"
+        [ngClass]="{ active: active === 'historico' }"
+        >Histórico</a
+      >
     </div>
   </div>
+  <div class="theme-toggle">
+    <app-toggle-menu></app-toggle-menu>
+  </div>
+</div>

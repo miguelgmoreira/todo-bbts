@@ -1,53 +1,52 @@
-<h1>Lista de tarefas</h1>
-<hr>
+<h1 class="main-title">Lista de tarefas</h1>
+<hr />
 <app-todo-add></app-todo-add>
-<hr>
+<hr />
 <app-todo-search></app-todo-search>
-<hr>
+<hr />
 <app-todo-filter></app-todo-filter>
-<hr>
+<hr />
 <div *ngIf="!isLoading">
-    <div class="todo" 
-        *ngFor="let todo of todos 
-        | filterSearch:filterText 
-        | filterSelect:filterOption
-        | filterOrdem: filterOrdem"
-        [ngClass]="{'completed': todo.status === 'completa'}"
-        >
-    
-        <div class="todo-info">
-            <p>{{todo.nome}}</p>
-            <p>({{todo.tipo}})</p>
-            <p>{{todo.hora}}</p>
-        </div>
-    
-        <div class="botoes">
-            <button 
-            class="btn btn-primary" 
-            (click)="mudarStatus(todo)">
-            <i class="bi bi-check-lg" *ngIf="!todo.estaCompleta"></i>
-            <i class="bi bi-x-lg" *ngIf="todo.estaCompleta"></i>
-        </button>
-    
-        <button 
-            class="btn btn-danger" 
-            (click)="remover(todo)"><i class="bi bi-trash-fill"></i>
-        </button>
-    
-        
+  <div
+    class="todo"
+    *ngFor="
+      let todo of todos
+        | filterSearch : filterText
+        | filterSelect : filterOption
+        | filterOrdem : filterOrdem
+    "
+    [ngClass]="{ completed: todo.status === 'completa' }"
+  >
+    <div class="todo-info">
+      <p>{{ todo.nome }}</p>
+      <p>({{ todo.tipo }})</p>
+      <p>{{ todo.hora }}</p>
     </div>
-</div>
+
+    <div class="botoes">
+      <button class="btn btn-primary" (click)="mudarStatus(todo)">
+        <i class="bi bi-check-lg" *ngIf="!todo.estaCompleta"></i>
+        <i class="bi bi-x-lg" *ngIf="todo.estaCompleta"></i>
+      </button>
+
+      <button class="btn btn-danger" (click)="remover(todo)">
+        <i class="bi bi-trash-fill"></i>
+      </button>
+    </div>
+  </div>
 </div>
 <p *ngIf="todos.length < 1 && !isLoading">Não há nenhuma tarefa cadastrada!</p>
 <app-loading *ngIf="isLoading"></app-loading>
 
-<app-mensagem 
-    [status]="situacao"  
-    [textoMensagem]="'Status alterado para ' + status" 
-    [icone]="'bi bi-check-circle'" 
-    *ngIf="situacao === 'success'"></app-mensagem>
-    <app-mensagem 
-    [status]="situacao"  
-    [textoMensagem]="'Erro ao alterar status'" 
-    [icone]="'bi bi-x-circle'"
-    *ngIf="situacao === 'error'"></app-mensagem>
+<app-mensagem
+  [status]="situacao"
+  [textoMensagem]="'Status alterado para ' + status"
+  [icone]="'bi bi-check-circle'"
+  *ngIf="situacao === 'success'"
+></app-mensagem>
+<app-mensagem
+  [status]="situacao"
+  [textoMensagem]="'Erro ao alterar status'"
+  [icone]="'bi bi-x-circle'"
+  *ngIf="situacao === 'error'"
+></app-mensagem>

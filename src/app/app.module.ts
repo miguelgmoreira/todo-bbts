@@ -8,10 +8,24 @@ import { TodoModule } from './components/todo/todo.module';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ScrollTopComponent } from './shared/scroll-top/scroll-top.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { ToggleMenuComponent } from './shared/toggle-menu/toggle-menu.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, ScrollTopComponent, NavbarComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, TodoModule],
+  declarations: [
+    AppComponent,
+    FooterComponent,
+    ScrollTopComponent,
+    NavbarComponent,
+    ToggleMenuComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    TodoModule,
+    NgbModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

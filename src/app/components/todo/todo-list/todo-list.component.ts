@@ -72,7 +72,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
         todo.adicionadaAoHistoricoEm = dataDeExclusao;
         todo.metodoDeAdicaoAoHistorico = 'Excluído';
 
-        this.adicionarTodoAoHistórico(todo);
+        this.adicionarTodoAoHistorico(todo);
         console.log('response received');
         this.atualizarLista();
       },
@@ -110,12 +110,13 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
     this.todoService.updateTodo(todo).subscribe({
       next: () => {
-        this.adicionarTodoAoHistórico(todo);
+        this.adicionarTodoAoHistorico(todo);
 
         this.situacao = 'success';
         setTimeout(() => {
           this.situacao = '';
         }, 2500);
+        console.log('Status atualizado com sucesso!');
       },
       error: (error) => {
         console.error('Erro durante execução do Script', error);
@@ -127,8 +128,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
     });
   }
 
-  adicionarTodoAoHistórico(todo: Todo) {
-    todo.id = Date.now();
+  adicionarTodoAoHistorico(todo: Todo) {
     this.todoService.adicionarTodoAoHistorico(todo).subscribe();
   }
 }

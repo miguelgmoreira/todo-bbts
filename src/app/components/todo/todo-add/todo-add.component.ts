@@ -72,7 +72,6 @@ export class TodoAddComponent implements OnInit {
     if (!this.todoForm.valid) {
       console.log('Formulário inválido');
     } else {
-      this.todo.id = this.id++;
       this.todo.nome = this.todoForm.value.nome;
       this.todo.tipo = this.todoForm.value.tipo;
       this.todo.hora = this.todoForm.value.hora;

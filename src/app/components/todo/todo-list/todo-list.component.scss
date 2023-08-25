@@ -1,18 +1,20 @@
 .todo {
-    box-shadow: 0 0 4px #121214;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  box-shadow: 0 0 4px #000;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--list-items-color);
+  color: var(--text-color);
 }
 
 p {
-    margin: 0;
+  margin: 0;
 }
 
 .completed {
-    text-decoration: line-through;
-    background-color: #ddd;
+  text-decoration: line-through;
+  background-color: var(--completed-color);
 }

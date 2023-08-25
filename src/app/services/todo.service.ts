@@ -24,6 +24,7 @@ export class TodoService {
   textoMudou = new Subject<string>();
   opcaoMudou = new Subject<string>();
   ordemMudou = new Subject<string>();
+  temaMudou = new Subject<string>();
   modalClosed = new EventEmitter<Event>();
 
   constructor(private http: HttpClient) {}
@@ -72,8 +73,9 @@ export class TodoService {
   }
 
   adicionarTodoAoHistorico(todo: Todo) {
+    const novoTodoHistorico: Todo = { ...todo, id: null }; // Gera um novo ID para o histórico
     const path = `${this.baseApiUrl}/historico`;
-    return this.http.post<Todo>(path, todo).pipe(
+    return this.http.post<Todo>(path, novoTodoHistorico).pipe(
       map((response) => {
         console.log('Todo adicionado com sucesso ao histórico:', response);
         return response;

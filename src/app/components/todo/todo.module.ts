@@ -17,6 +17,7 @@ import { TodoTableComponent } from './todo-table/todo-table.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TodoHistoricoComponent } from './todo-historico/todo-historico.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ReactiveFormsModule,
     ModalModule,
     NgxPaginationModule,
+    NgbModule,
   ],
   exports: [
     TodoAddComponent,

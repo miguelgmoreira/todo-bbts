@@ -11,12 +11,11 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 1.5rem;
+  justify-content: space-between;
   height: 5rem;
   padding: 0 4rem;
   margin-bottom: 3rem;
-  background-color: #333;
+  background-color: var(--navbar-bg-color);
   box-shadow: 0 0 10px #000;
 }
 
@@ -34,13 +33,19 @@ a {
   text-decoration: none;
   transition: 0.4s;
   cursor: pointer;
-  color: #000;
+  color: var(--navbar-text-color);
 }
 
 .app-nav a:hover {
-  color: #d8d8d8;
+  color: var(--hover-color);
 }
 
 .active {
-  color: #d8d8d8;
+  color: var(--hover-color);
+}
+
+img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
 }
