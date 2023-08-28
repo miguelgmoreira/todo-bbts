@@ -5,7 +5,8 @@ import { TodoTableComponent } from './components/todo/todo-table/todo-table.comp
 import { TodoHistoricoComponent } from './components/todo/todo-historico/todo-historico.component';
 
 const routes: Routes = [
-  { path: '', component: TodoListComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: TodoListComponent },
   { path: 'tarefas', component: TodoTableComponent },
   { path: 'historico', component: TodoHistoricoComponent },
 ];

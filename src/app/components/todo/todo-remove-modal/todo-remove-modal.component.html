@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Editar tarefa</h4>
+  <button
+    type="button"
+    class="btn btn-danger"
+    aria-label="Close"
+    (click)="closeModal()"
+  >
+    ×
+  </button>
+</div>
+<div class="modal-body dialog">
+  Tem certeza que deseja remover a terefa <strong>{{ todo.nome }}</strong> ?
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-primary" (click)="confirmRemove()">Confirmar</button>
+  <button type="button" class="btn btn-default" (click)="closeModal()">
+    Voltar
+  </button>
+</div>

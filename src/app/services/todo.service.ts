@@ -16,7 +16,7 @@ import { Todo } from '../components/todo/models/todo.model';
   providedIn: 'root',
 })
 export class TodoService {
-  private baseApiUrl = 'http://localhost:3000';
+  private baseApiUrl = 'http://localhost:3046';
 
   private atualizarListaTodos = new Subject<void>();
   atualizarListaTodos$ = this.atualizarListaTodos.asObservable();
@@ -26,6 +26,9 @@ export class TodoService {
   ordemMudou = new Subject<string>();
   temaMudou = new Subject<string>();
   modalClosed = new EventEmitter<Event>();
+  removeConfirmado = new Subject<Todo>();
+
+  todos: Todo[] = [];
 
   constructor(private http: HttpClient) {}
 

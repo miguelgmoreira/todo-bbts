@@ -30,6 +30,7 @@
 :root {
   --bg-color: #fff;
   --text-color: #000;
+  --main-title-color: #000;
   --navbar-text-color: #000;
   --navbar-bg-color: #fff;
   --hover-color: #adb5bd;
@@ -43,6 +44,7 @@
 [data-theme="dark"] {
   --bg-color: #212529;
   --text-color: #adb5bd;
+  --main-title-color: #fff;
   --navbar-text-color: #fff;
   --navbar-bg-color: #333;
   --hover-color: #adb5bd;
@@ -61,4 +63,8 @@ p,
 a,
 label {
   color: var(--text-color);
+}
+
+.main-title {
+  color: var(--main-title-color);
 }

@@ -29,7 +29,7 @@
         <i class="bi bi-x-lg" *ngIf="todo.estaCompleta"></i>
       </button>
 
-      <button class="btn btn-danger" (click)="remover(todo)">
+      <button class="btn btn-danger" (click)="openRemoveModal(todo)">
         <i class="bi bi-trash-fill"></i>
       </button>
     </div>
@@ -42,11 +42,23 @@
   [status]="situacao"
   [textoMensagem]="'Status alterado para ' + status"
   [icone]="'bi bi-check-circle'"
-  *ngIf="situacao === 'success'"
+  *ngIf="situacao === 'success' && acao === 'alterar'"
 ></app-mensagem>
 <app-mensagem
   [status]="situacao"
   [textoMensagem]="'Erro ao alterar status'"
   [icone]="'bi bi-x-circle'"
-  *ngIf="situacao === 'error'"
+  *ngIf="situacao === 'error' && acao === 'alterar'"
+></app-mensagem>
+<app-mensagem
+  [status]="situacao"
+  [textoMensagem]="'Tarefa excluida com sucesso'"
+  [icone]="'bi bi-check-circle'"
+  *ngIf="situacao === 'success' && acao === 'excluir'"
+></app-mensagem>
+<app-mensagem
+  [status]="situacao"
+  [textoMensagem]="'Erro ao excluir tarefa'"
+  [icone]="'bi bi-x-circle'"
+  *ngIf="situacao === 'error' && acao === 'excluir'"
 ></app-mensagem>

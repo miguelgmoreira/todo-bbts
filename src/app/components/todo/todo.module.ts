@@ -18,6 +18,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { TodoHistoricoComponent } from './todo-historico/todo-historico.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TodoRemoveModalComponent } from './todo-remove-modal/todo-remove-modal.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TodoTableComponent,
     LoadingComponent,
     TodoHistoricoComponent,
+    TodoRemoveModalComponent,
   ],
   imports: [
     CommonModule,

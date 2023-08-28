@@ -1,23 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Todo } from '../models/todo.model';
 import { TodoService } from 'src/app/services/todo.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { clone } from 'lodash';
 import { TodoEditComponent } from '../todo-edit/todo-edit.component';
+import { TodoRemoveModalComponent } from '../todo-remove-modal/todo-remove-modal.component';
 
 @Component({
   selector: 'app-todo-table',
   templateUrl: './todo-table.component.html',
   styleUrls: ['./todo-table.component.scss'],
 })
-export class TodoTableComponent implements OnInit {
+export class TodoTableComponent implements OnInit, OnDestroy {
   todos: Todo[] = [];
   updateTodo: Todo = new Todo();
   listaSubscription: Subscription = new Subscription();
   situacao: string = '';
   filterOrdem: string = 'crescente';
   tema: string = '';
+  confirmSub: Subscription;
+  acao: string = '';
 
   config = {};
 
@@ -29,16 +32,20 @@ export class TodoTableComponent implements OnInit {
       next: () => {
         console.log('Tarefa editada com sucesso');
 
+        this.acao = 'editar';
         this.situacao = 'success';
         setTimeout(() => {
+          this.acao = '';
           this.situacao = '';
         }, 2500);
       },
       error: (error: Error) => {
         console.log('Ocorreu um erro ao editar' + error);
 
+        this.acao = 'editar';
         this.situacao = 'error';
         setTimeout(() => {
+          this.acao = '';
           this.situacao = '';
         }, 2500);
       },
@@ -60,6 +67,14 @@ export class TodoTableComponent implements OnInit {
       backdrop: 'static',
       keyboard: false,
     };
+
+    this.confirmSub = this.todoService.removeConfirmado.subscribe((todo) => {
+      this.remover(todo.id);
+    });
+  }
+
+  ngOnDestroy() {
+    this.confirmSub.unsubscribe();
   }
 
   getTodos() {
@@ -69,10 +84,24 @@ export class TodoTableComponent implements OnInit {
   remover(id: number) {
     this.todoService.removeTodo(id).subscribe({
       next: () => {
+        this.acao = 'excluir';
+        this.situacao = 'success';
+        setTimeout(() => {
+          this.situacao = '';
+          this.acao = '';
+        }, 2500);
+
         console.log('response received');
-        this.getTodos();
+        this.atualizarLista();
       },
       error: (error) => {
+        this.acao = 'excluir';
+        this.situacao = 'error';
+        setTimeout(() => {
+          this.situacao = '';
+          this.acao = '';
+        }, 2500);
+
         console.error('Erro durante execução do Script', error);
       },
     });
@@ -84,6 +113,21 @@ export class TodoTableComponent implements OnInit {
     const modalRef = this.modalService.open(TodoEditComponent, this.config);
 
     modalRef.componentInstance.todo = this.updateTodo;
+
+    modalRef.result.then((result) => {
+      if (result) {
+        console.log(result);
+      }
+    });
+  }
+
+  openRemoveModal(todo: Todo) {
+    const modalRef = this.modalService.open(
+      TodoRemoveModalComponent,
+      this.config
+    );
+
+    modalRef.componentInstance.todo = todo;
 
     modalRef.result.then((result) => {
       if (result) {
