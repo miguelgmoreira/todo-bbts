@@ -55,16 +55,5 @@
   </div>
   <button class="btn btn-primary" type="submit">Criar tarefa</button>
 
-  <app-mensagem
-    [status]="situacao"
-    [textoMensagem]="'Tarefa adicionada com sucesso'"
-    [icone]="'bi bi-check-circle'"
-    *ngIf="situacao === 'success'"
-  ></app-mensagem>
-  <app-mensagem
-    [status]="situacao"
-    [textoMensagem]="'Erro ao adicionar tarefa'"
-    [icone]="'bi bi-x-circle'"
-    *ngIf="situacao === 'error'"
-  ></app-mensagem>
+  <app-mensagem></app-mensagem>
 </form>

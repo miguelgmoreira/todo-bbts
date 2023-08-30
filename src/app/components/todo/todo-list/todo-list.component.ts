@@ -4,6 +4,8 @@ import { TodoService } from 'src/app/services/todo.service';
 import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TodoRemoveModalComponent } from '../todo-remove-modal/todo-remove-modal.component';
+import { MessagesService } from 'src/app/services/messages.service';
+import { DateTimeService } from 'src/app/services/date-time.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -16,10 +18,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
   filterText: string = '';
   filterOrdem: string = 'crescente';
   estaCompleta: boolean = false;
-  situacao: string = '';
   status: string = '';
   isLoading = false;
-  acao: string = '';
   private textoSub: Subscription;
   private ordemSub: Subscription;
   private opcaoSub: Subscription;
@@ -29,7 +29,9 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   constructor(
     private todoService: TodoService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private messagesService: MessagesService,
+    private dateTimeService: DateTimeService
   ) {}
 
   ngOnInit(): void {
@@ -95,16 +97,11 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   mudarStatus(todo: Todo) {
-    const d = new Date();
-    const horaFormatada =
-      d.getHours().toString().padStart(2, '0') +
-      ':' +
-      d.getMinutes().toString().padStart(2, '0');
-    const dia = d.getDate();
-    const mes = d.getMonth() + 1;
-    const dataDeCriacao = horaFormatada + ' - ' + dia + '/' + mes;
+    const dataFormatada = this.dateTimeService.getDataAtualFormatada();
+    const horaFormatada = this.dateTimeService.getHoraAtualFormatada();
 
-    todo.adicionadaAoHistoricoEm = dataDeCriacao;
+    todo.horaDeAdicaoAoHistorico = horaFormatada;
+    todo.diaDeAdicaoAoHistorico = dataFormatada;
     todo.metodoDeAdicaoAoHistorico = 'Status alterado';
 
     todo.estaCompleta = !todo.estaCompleta;
@@ -114,50 +111,37 @@ export class TodoListComponent implements OnInit, OnDestroy {
       todo.status = 'incompleta';
     }
 
-    this.status = todo.status;
-
     this.todoService.updateTodo(todo).subscribe({
       next: () => {
         this.adicionarTodoAoHistorico(todo);
 
-        this.situacao = 'success';
-        this.acao = 'alterar';
-        setTimeout(() => {
-          this.situacao = '';
-          this.acao = '';
-        }, 2500);
+        this.messagesService.adicionar(
+          'Status alterado com sucesso para ' + todo.status,
+          'success'
+        );
         console.log('Status atualizado com sucesso!');
       },
       error: (error) => {
         console.error('Erro durante execução do Script', error);
-        this.situacao = 'error';
-        setTimeout(() => {
-          this.situacao = '';
-        }, 2500);
+        this.messagesService.adicionar('Erro ao alterar status', 'error');
       },
     });
   }
 
   remover(todo: Todo) {
-    const d = new Date();
-    const horaFormatada =
-      d.getHours().toString().padStart(2, '0') +
-      ':' +
-      d.getMinutes().toString().padStart(2, '0');
-    const dia = d.getDate();
-    const mes = d.getMonth() + 1;
-    const dataDeExclusao = horaFormatada + ' - ' + dia + '/' + mes;
-
     this.todoService.removeTodo(todo.id).subscribe({
       next: () => {
-        todo.adicionadaAoHistoricoEm = dataDeExclusao;
+        const dataFormatada = this.dateTimeService.getDataAtualFormatada();
+        const horaFormatada = this.dateTimeService.getHoraAtualFormatada();
+
+        todo.horaDeAdicaoAoHistorico = horaFormatada;
+        todo.diaDeAdicaoAoHistorico = dataFormatada;
         todo.metodoDeAdicaoAoHistorico = 'Excluído';
-        this.situacao = 'success';
-        this.acao = 'excluir';
-        setTimeout(() => {
-          this.situacao = '';
-          this.acao = '';
-        }, 2500);
+        this.messagesService.adicionar(
+          'Tarefa excluída com sucesso',
+          'success'
+        );
+
         this.adicionarTodoAoHistorico(todo);
         console.log('response received');
         this.atualizarLista();
@@ -165,12 +149,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
       error: (error) => {
         console.error('Erro durante execução do Script', error);
 
-        this.situacao = 'error';
-        this.acao = 'excluir';
-        setTimeout(() => {
-          this.situacao = '';
-          this.acao = '';
-        }, 2500);
+        this.messagesService.adicionar('Erro ao excluir tarefa', 'error');
       },
     });
   }

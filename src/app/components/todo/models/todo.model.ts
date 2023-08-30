@@ -6,6 +6,7 @@ export class Todo {
   estaCompleta: boolean = false;
   deletada: boolean = false;
   status: string = 'incompleta';
-  adicionadaAoHistoricoEm: string = '';
+  horaDeAdicaoAoHistorico: string = '';
+  diaDeAdicaoAoHistorico: string = '';
   metodoDeAdicaoAoHistorico: string = '';
 }

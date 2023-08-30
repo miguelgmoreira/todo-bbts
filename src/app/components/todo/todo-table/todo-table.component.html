@@ -27,27 +27,4 @@
     </tr>
   </tbody>
 </table>
-<app-mensagem
-  [status]="situacao"
-  [textoMensagem]="'Tarefa editada com sucesso'"
-  [icone]="'bi bi-check-circle'"
-  *ngIf="situacao === 'success' && acao === 'editar'"
-></app-mensagem>
-<app-mensagem
-  [status]="situacao"
-  [textoMensagem]="'Erro ao adicionar tarefa'"
-  [icone]="'bi bi-x-circle'"
-  *ngIf="situacao === 'error' && acao === 'editar'"
-></app-mensagem>
-<app-mensagem
-  [status]="situacao"
-  [textoMensagem]="'Tarefa excluida com sucesso'"
-  [icone]="'bi bi-check-circle'"
-  *ngIf="situacao === 'success' && acao === 'excluir'"
-></app-mensagem>
-<app-mensagem
-  [status]="situacao"
-  [textoMensagem]="'Erro ao excluir tarefa'"
-  [icone]="'bi bi-x-circle'"
-  *ngIf="situacao === 'error' && acao === 'excluir'"
-></app-mensagem>
+<app-mensagem></app-mensagem>

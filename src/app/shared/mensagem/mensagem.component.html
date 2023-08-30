@@ -1,3 +1,13 @@
-<div ngClass="status-message {{status}}">
-    {{textoMensagem}} <span><i [ngClass]="icone"></i></span>
+<div
+  ngClass="status-message {{ messagesService.status }}"
+  *ngIf="messagesService.mensagem && messagesService.status"
+>
+  {{ messagesService.mensagem }}
+  <span
+    ><i class="bi bi-x-circle" *ngIf="messagesService.status === 'error'"></i
+    ><i
+      class="bi bi-check-circle"
+      *ngIf="messagesService.status === 'success'"
+    ></i
+  ></span>
 </div>

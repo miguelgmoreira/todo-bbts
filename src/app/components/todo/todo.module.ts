@@ -12,6 +12,7 @@ import { LoadingComponent } from 'src/app/shared/loading/loading.component';
 import { FilterPipe } from 'src/app/pipes/filter-select.pipe';
 import { FilterSearchPipe } from 'src/app/pipes/filter-search.pipe';
 import { FilterOrdemPipe } from 'src/app/pipes/filter-ordem.pipe';
+import { FilterDataPipe } from 'src/app/pipes/filter-data.pipe';
 import { MensagemComponent } from 'src/app/shared/mensagem/mensagem.component';
 import { TodoTableComponent } from './todo-table/todo-table.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -30,6 +31,7 @@ import { TodoRemoveModalComponent } from './todo-remove-modal/todo-remove-modal.
     FilterPipe,
     FilterSearchPipe,
     FilterOrdemPipe,
+    FilterDataPipe,
     MensagemComponent,
     TodoTableComponent,
     LoadingComponent,

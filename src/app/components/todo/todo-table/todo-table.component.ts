@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { clone } from 'lodash';
 import { TodoEditComponent } from '../todo-edit/todo-edit.component';
 import { TodoRemoveModalComponent } from '../todo-remove-modal/todo-remove-modal.component';
+import { MessagesService } from 'src/app/services/messages.service';
 
 @Component({
   selector: 'app-todo-table',
@@ -16,38 +17,27 @@ export class TodoTableComponent implements OnInit, OnDestroy {
   todos: Todo[] = [];
   updateTodo: Todo = new Todo();
   listaSubscription: Subscription = new Subscription();
-  situacao: string = '';
   filterOrdem: string = 'crescente';
   tema: string = '';
   confirmSub: Subscription;
-  acao: string = '';
 
   config = {};
 
   constructor(
     private todoService: TodoService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private messagesService: MessagesService
   ) {
     this.todoService.modalClosed.subscribe({
       next: () => {
         console.log('Tarefa editada com sucesso');
 
-        this.acao = 'editar';
-        this.situacao = 'success';
-        setTimeout(() => {
-          this.acao = '';
-          this.situacao = '';
-        }, 2500);
+        this.messagesService.adicionar('Tarefa editada com sucesso', 'success');
       },
       error: (error: Error) => {
         console.log('Ocorreu um erro ao editar' + error);
 
-        this.acao = 'editar';
-        this.situacao = 'error';
-        setTimeout(() => {
-          this.acao = '';
-          this.situacao = '';
-        }, 2500);
+        this.messagesService.adicionar('Erro ao editar tarefa', 'error');
       },
     });
 
@@ -84,23 +74,16 @@ export class TodoTableComponent implements OnInit, OnDestroy {
   remover(id: number) {
     this.todoService.removeTodo(id).subscribe({
       next: () => {
-        this.acao = 'excluir';
-        this.situacao = 'success';
-        setTimeout(() => {
-          this.situacao = '';
-          this.acao = '';
-        }, 2500);
+        this.messagesService.adicionar(
+          'Tarefa excluída com sucesso',
+          'success'
+        );
 
         console.log('response received');
         this.atualizarLista();
       },
       error: (error) => {
-        this.acao = 'excluir';
-        this.situacao = 'error';
-        setTimeout(() => {
-          this.situacao = '';
-          this.acao = '';
-        }, 2500);
+        this.messagesService.adicionar('Erro ao excluir tarefa', 'error');
 
         console.error('Erro durante execução do Script', error);
       },
@@ -122,12 +105,14 @@ export class TodoTableComponent implements OnInit, OnDestroy {
   }
 
   openRemoveModal(todo: Todo) {
+    this.updateTodo = clone(todo);
+
     const modalRef = this.modalService.open(
       TodoRemoveModalComponent,
       this.config
     );
 
-    modalRef.componentInstance.todo = todo;
+    modalRef.componentInstance.todo = this.updateTodo;
 
     modalRef.result.then((result) => {
       if (result) {

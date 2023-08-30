@@ -9,7 +9,6 @@ import { TodoService } from 'src/app/services/todo.service';
 })
 export class TodoHistoricoComponent implements OnInit {
   todosHistorico: Todo[] = [];
-  lista = [1, 2, 3, 4, 5, 6, 7, 8, 1, 1, , 1, 1, 1, 1, 1, 1, 1, 1];
   page: number = 1;
   pageSize: number = 10;
   count: number = 0;

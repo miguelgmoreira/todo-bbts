@@ -10,6 +10,8 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Todo } from '../models/todo.model';
+import { MessagesService } from 'src/app/services/messages.service';
+import { DateTimeService } from 'src/app/services/date-time.service';
 
 @Component({
   selector: 'app-todo-add',
@@ -22,15 +24,14 @@ export class TodoAddComponent implements OnInit {
   public horas: Hora[];
   public id: number;
   public submitted: boolean = false;
-  public situacao: string;
+  public todoForm: FormGroup;
 
-  public todoForm: FormGroup = new FormGroup({
-    nome: new FormControl(''),
-    tipo: new FormControl(''),
-    hora: new FormControl(''),
-  });
-
-  constructor(private todoService: TodoService, private fb: FormBuilder) {}
+  constructor(
+    private todoService: TodoService,
+    private fb: FormBuilder,
+    private messagesService: MessagesService,
+    private dateTimeService: DateTimeService
+  ) {}
 
   ngOnInit(): void {
     this.getCategorias();
@@ -59,14 +60,8 @@ export class TodoAddComponent implements OnInit {
   }
 
   adicionar() {
-    const d = new Date();
-    const horaFormatada =
-      d.getHours().toString().padStart(2, '0') +
-      ':' +
-      d.getMinutes().toString().padStart(2, '0');
-    const dia = d.getDate();
-    const mes = d.getMonth() + 1;
-    const dataDeCriacao = horaFormatada + ' - ' + dia + '/' + mes;
+    const horaFormatada = this.dateTimeService.getHoraAtualFormatada();
+    const dataFormatada = this.dateTimeService.getDataAtualFormatada();
 
     this.submitted = true;
     if (!this.todoForm.valid) {
@@ -75,14 +70,15 @@ export class TodoAddComponent implements OnInit {
       this.todo.nome = this.todoForm.value.nome;
       this.todo.tipo = this.todoForm.value.tipo;
       this.todo.hora = this.todoForm.value.hora;
-      this.todo.adicionadaAoHistoricoEm = dataDeCriacao;
+      this.todo.horaDeAdicaoAoHistorico = horaFormatada;
+      this.todo.diaDeAdicaoAoHistorico = dataFormatada;
       this.todo.metodoDeAdicaoAoHistorico = 'Adicionado';
       this.todoService.adicionarTodo(this.todo).subscribe({
         next: () => {
-          this.situacao = 'success';
-          setTimeout(() => {
-            this.situacao = '';
-          }, 3000);
+          this.messagesService.adicionar(
+            'Tarefa adicionada com sucesso',
+            'success'
+          );
 
           this.clear();
 
@@ -93,10 +89,7 @@ export class TodoAddComponent implements OnInit {
         error: (error) => {
           console.error('Erro durante execução do Script', error);
 
-          this.situacao = 'error';
-          setTimeout(() => {
-            this.situacao = '';
-          }, 3000);
+          this.messagesService.adicionar('Erro ao adicionar tarefa', 'error');
         },
       });
     }

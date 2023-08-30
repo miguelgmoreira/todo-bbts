@@ -38,27 +38,4 @@
 <p *ngIf="todos.length < 1 && !isLoading">Não há nenhuma tarefa cadastrada!</p>
 <app-loading *ngIf="isLoading"></app-loading>
 
-<app-mensagem
-  [status]="situacao"
-  [textoMensagem]="'Status alterado para ' + status"
-  [icone]="'bi bi-check-circle'"
-  *ngIf="situacao === 'success' && acao === 'alterar'"
-></app-mensagem>
-<app-mensagem
-  [status]="situacao"
-  [textoMensagem]="'Erro ao alterar status'"
-  [icone]="'bi bi-x-circle'"
-  *ngIf="situacao === 'error' && acao === 'alterar'"
-></app-mensagem>
-<app-mensagem
-  [status]="situacao"
-  [textoMensagem]="'Tarefa excluida com sucesso'"
-  [icone]="'bi bi-check-circle'"
-  *ngIf="situacao === 'success' && acao === 'excluir'"
-></app-mensagem>
-<app-mensagem
-  [status]="situacao"
-  [textoMensagem]="'Erro ao excluir tarefa'"
-  [icone]="'bi bi-x-circle'"
-  *ngIf="situacao === 'error' && acao === 'excluir'"
-></app-mensagem>
+<app-mensagem></app-mensagem>

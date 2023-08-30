@@ -2,7 +2,8 @@
   <div
     class="item-da-lista"
     *ngFor="
-      let todo of todosHistorico
+      let todo of todosHistorico 
+        | filterData
         | paginate
           : {
               itemsPerPage: 8,
@@ -13,7 +14,10 @@
   >
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">{{ todo.nome }}</h5>
-      <strong>{{ todo.adicionadaAoHistoricoEm }}</strong>
+      <strong
+        >{{ todo.horaDeAdicaoAoHistorico }} -
+        {{ todo.diaDeAdicaoAoHistorico }}</strong
+      >
     </div>
     <p class="mb-1">{{ todo.tipo }}</p>
     <p class="mb-1">{{ todo.hora }}</p>
